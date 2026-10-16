@@ -212,7 +212,7 @@ Clearly label sample data and simulated results during presentations and demos.
 
 ## 📄 Licensing & Acknowledgements
 
-Before redistributing or publishing this repository, review the licensing terms and required notices for all included components and dependencies. No tracked `LICENSE` or `COPYING` file was found in the local project when this README was prepared. The absence of a local license does not itself grant permission to relicense or redistribute third-party code. Preserve any notices required by the applicable terms.
+Before redistributing or publishing this repository, review the licensing terms and required notices for all included components and dependencies.
 
 ## 👥 Team
 
