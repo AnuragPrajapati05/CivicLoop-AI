@@ -1,94 +1,138 @@
-# CivicLoop AI — Predictive Waste Intelligence & Verified Civic Action Network
+# ♻️ CivicLoop AI
+### Predictive Waste Intelligence & Verified Civic Action Network
 
-## Overview
+**Team CODE5URGE** · Civic Waste Operations · React · FastAPI · SQLite · Leaflet
 
-CivicLoop AI is a civic waste operations platform for reporting waste incidents, analysing recurring hotspots, prioritising collection interventions, and tracking resolution evidence for human review. It combines a citizen reporting experience with an operations dashboard, a FastAPI backend, local AI analysis, route optimisation, and optional IoT/Firebase integrations.
+CivicLoop AI is a civic waste-operations platform designed to connect citizen reporting with municipal operations workflows. It brings incident reporting, bin monitoring, complaint tracking, route planning, fleet visibility, waste analysis, and operational analytics into one project.
 
-## Problem Statement
+> **Prototype status:** This repository contains an adapted and rebranded existing implementation. Some AI outputs, analytics, and device activity can use simulation or sample data. Predictive performance and environmental impact have not been independently validated.
 
-Reactive complaint handling can leave reports fragmented across channels, make prioritisation difficult, and allow recurring hotspots to persist. Without reliable closure evidence and review, a complaint may be marked complete without clearly demonstrating that the civic issue was resolved. CivicLoop AI is intended to address these workflow gaps; the repository does not claim independently verified statistics about them.
+---
 
-## Proposed Solution
+## 🚦 The CivicLoop Workflow
 
-1. **SEE** — Collect incident descriptions, photos, and location information from citizens and connected systems.
-2. **PREDICT** — Analyse available incident and bin data, with explainable ranking and classification outputs where supported by the current implementation.
-3. **ACT** — Present collection priorities, alerts, routes, and fleet information for operational review.
-4. **VERIFY** — Track complaint status and evidence, with human review remaining part of the operational workflow.
+| Stage | Purpose | Example |
+|---|---|---|
+| **SEE** | Collect incident descriptions, photos, locations, and available bin/device signals. | A resident reports an overflowing bin. |
+| **PREDICT** | Analyse available data and surface classifications or priorities where supported. | Flag a bin or complaint for attention. |
+| **ACT** | Support operational review with alerts, collection routes, and fleet information. | An operator reviews a suggested collection route. |
+| **VERIFY** | Track status and supporting information for human review. | A reviewer checks the complaint status and evidence. |
 
-## Features
+The workflow describes the intended product direction; it does not imply that every stage is automated or validated in the current prototype.
 
-### Working in the repository
+## ✨ What’s in the Project?
 
-- Citizen waste-incident submission with image and location fields.
-- Complaint tracking and operations-dashboard complaint views.
-- SQLite persistence through SQLAlchemy models.
-- Dustbin status, fill-level, battery, alert, and route views.
-- FastAPI authentication with JWT access tokens and role-aware dashboard routes.
-- WebSocket endpoints for dashboard updates.
-- Waste fill-level and waste-type image analysis endpoints.
-- YOLO-based model loading when model files and dependencies are available, with simulation fallbacks in the backend for unavailable models.
-- Collection route optimisation using Google OR-Tools.
-- Leaflet-based maps and fleet/driver views in the dashboard.
-- IoT update endpoint protected by an API key, plus included ESP32/Raspberry Pi examples and a simulator.
-- Optional Firebase Admin/Firestore synchronisation when `serviceAccountKey.json` is supplied.
+### Citizen experience
+- Submit a waste complaint with location, description, urgency, and optional photo.
+- Track a complaint using its tracking identifier.
+- Use browser location where permission is granted.
 
-### Partial or environment-dependent
+### Operations dashboard
+- Dashboard summaries for bins, complaints, alerts, routes, and fleet activity.
+- Smart-bin status and fill-level views.
+- Complaint queues, status updates, and image-analysis actions.
+- Route planning and route-stop visualisation.
+- Fleet and driver views, including browser geolocation where enabled.
+- Analytics charts and waste-segregation guidance.
 
-- AI results use simulation when the relevant model is unavailable; they are not a validated forecasting system.
-- Firebase synchronisation is optional and disabled when credentials are absent.
-- Resolution evidence and human review are represented by the existing complaint workflow; they are not a municipal verification service.
+### Backend and integrations
+- FastAPI endpoints with JWT authentication and role-aware access.
+- SQLAlchemy persistence using SQLite by default.
+- WebSocket endpoints for supported live updates.
+- OR-Tools-based route optimisation where configured.
+- Waste image-analysis endpoints with local model loading and simulation fallbacks.
+- Optional IoT simulator and ESP32/Raspberry Pi examples.
+- Optional Firebase synchronisation when valid local credentials are provided.
 
-## Technology Stack
+Feature availability depends on configuration, dependencies, model files, and whether the backend is running. The presence of a page or integration does not guarantee a live external service is configured.
 
-- **Operations dashboard:** React 19, Vite, React Router, Axios, Recharts, Leaflet, and React Leaflet (`waste-dashboard/`).
-- **Citizen app:** React 19, Vite, React Router, Axios, and React Leaflet (`citizen-app/`).
-- **Additional frontend:** a root React/Vite app with Leaflet and the existing dashboard components.
-- **Backend:** Python, FastAPI, Uvicorn, SQLAlchemy, and Pydantic.
-- **Database:** SQLite by default at `smart-waste-backend-v2/waste_management.db`.
-- **AI/ML:** Ultralytics YOLO model loading for bin/waste analysis, with a rules/simulation fallback.
-- **Optimisation:** Google OR-Tools for collection-route optimisation.
-- **Mapping and live updates:** Leaflet, WebSockets, GPS/fleet endpoints, ESP32, and Raspberry Pi examples.
-- **Optional integration:** Firebase Admin SDK and Google Cloud Firestore.
-
-The presence of a dependency or example does not guarantee that the corresponding external service or hardware is configured in every environment.
-
-## Project Structure
+## 🧱 Architecture
 
 ```text
-smart-waste-management/
-├── smart-waste-backend-v2/   FastAPI app, SQLAlchemy models, AI, routes, seed scripts, and IoT tools
-├── waste-dashboard/          Authenticated operations dashboard
-├── citizen-app/              Citizen reporting and complaint tracking frontend
-├── src/                      Additional root React/Vite dashboard frontend
-├── hardware/                 Hardware examples
-├── iot_hardware/             ESP32/Raspberry Pi sensor examples
-├── react-native-reference/   Mobile integration notes
-└── public/                   Shared frontend static assets
+Citizen App ─────────┐
+                     │
+Operations Dashboard ├── HTTP / WebSocket ──> FastAPI Backend
+                     │                            │
+Root Frontend ───────┘                            ├── SQLAlchemy / SQLite
+                                                  ├── AI analysis / fallbacks
+                                                  ├── Route optimisation
+                                                  ├── IoT simulator / device API
+                                                  └── Optional Firebase sync
 ```
 
-## Installation and Setup
+## 🛠️ Technology Stack
 
-### Backend
+| Area | Technologies |
+|---|---|
+| Operations dashboard | React, Vite, React Router, Axios, Recharts, Leaflet, React Leaflet |
+| Citizen app | React, Vite, React Router, Axios, React Leaflet |
+| Additional frontend | Root React/Vite app |
+| Backend | Python, FastAPI, Uvicorn, SQLAlchemy, Pydantic |
+| Database | SQLite by default |
+| AI / image analysis | Ultralytics YOLO when model files and dependencies are available; simulation fallback otherwise |
+| Route optimisation | Google OR-Tools |
+| Live updates and devices | WebSockets, IoT simulator, ESP32/Raspberry Pi examples |
+| Optional integration | Firebase Admin SDK / Firestore |
 
-From the repository root:
+## 📁 Repository Structure
+
+```text
+CivicLoop-AI/
+├── smart-waste-backend-v2/   # FastAPI backend, models, routes, seed scripts, IoT tools
+├── waste-dashboard/          # Operations dashboard
+├── citizen-app/              # Citizen reporting and tracking app
+├── src/                      # Additional root frontend
+├── public/                   # Static assets
+├── hardware/                 # Hardware examples
+├── iot_hardware/             # ESP32 and Raspberry Pi examples
+└── react-native-reference/   # Mobile integration notes
+```
+
+## 🚀 Run Locally (Windows PowerShell)
+
+### 1. Prerequisites
+
+- Node.js and npm
+- Python 3.11+ (or a compatible version supported by the backend dependencies)
+- Git
+
+Optional integrations may require additional dependencies, model files, credentials, hardware, or services.
+
+### 2. Start the backend
+
+Open a terminal at the repository root:
 
 ```powershell
 cd smart-waste-backend-v2
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-$env:SECRET_KEY = "<replace-with-a-long-random-secret>"
-$env:ADMIN_PASSWORD = "<choose-a-strong-local-admin-password>"
+```
+
+Set local secrets for this terminal session. Use your own strong values; do not commit them:
+
+```powershell
+$env:SECRET_KEY = "<your-long-random-secret>"
+$env:ADMIN_PASSWORD = "<your-strong-local-admin-password>"
+```
+
+Initialise the database, seed the administrator, and start the API:
+
+```powershell
 python -c "from database import initialize_database; initialize_database()"
 python seed_admin.py
 python main.py
 ```
 
-The backend uses `sqlite:///./waste_management.db` by default. `initialize_database()` creates missing SQLAlchemy tables without dropping existing data.
+The backend is expected at `http://localhost:8000`. If the app starts on a different port, use the address printed by the server.
 
-### Operations dashboard
+API documentation (when the backend is running): [http://localhost:8000/docs](http://localhost:8000/docs)
 
-In another terminal:
+> **Database note:** The default local database is `waste_management.db` inside the backend directory. Back up any existing database before changing or resetting local data.
+
+### 3. Start the operations dashboard
+
+Open a second terminal from the repository root:
 
 ```powershell
 cd waste-dashboard
@@ -96,11 +140,11 @@ npm install
 npm run dev
 ```
 
-The dashboard normally opens at `http://localhost:5173`.
+Open the local URL printed by Vite (often `http://localhost:5173`).
 
-### Citizen app
+### 4. Start the citizen app (optional)
 
-To run the citizen-facing frontend separately:
+Open a third terminal from the repository root:
 
 ```powershell
 cd citizen-app
@@ -108,60 +152,74 @@ npm install
 npm run dev
 ```
 
-The Vite server will select an available local port if 5173 is already in use.
+Vite uses another available port if the default port is already occupied.
 
-### IoT simulator
+### 5. Start the root frontend (optional)
 
-With the backend running:
+```powershell
+npm install
+npm run dev
+```
+
+Run each frontend in its own terminal. The root frontend, operations dashboard, and citizen app are separate applications; they do not automatically share one navigation shell.
+
+### 6. Run the IoT simulator (optional)
+
+With the backend running, open another terminal:
 
 ```powershell
 cd smart-waste-backend-v2
 python simulate_iot.py
 ```
 
-## Environment Configuration
+Use only the IoT key configured for your local backend/device simulator. Do not use a privileged secret in browser-exposed variables.
 
-The backend loads optional values from a `.env` file. Use placeholders for local or deployment secrets:
+## 🔐 Configuration & Secrets
 
-```dotenv
-DATABASE_URL=sqlite:///./waste_management.db
-SECRET_KEY=<replace-with-a-long-random-secret>
-ADMIN_PASSWORD=<choose-a-strong-admin-password>
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-REFRESH_TOKEN_EXPIRE_DAYS=7
-CORS_ORIGINS=http://localhost:5173,http://localhost:5174,http://localhost:5175
-UPLOAD_DIR=./uploads
-MAX_REQUEST_SIZE_MB=5
-RATE_LIMIT=100/minute
-IOT_API_KEY=<replace-with-your-iot-api-key>
-VITE_IOT_API_KEY=<same-iot-key-for-the-dashboard-only-when-needed>
-```
+The backend supports environment-based configuration. Depending on the features used, configure values such as:
 
-Firebase is optional. If used, provide a local `serviceAccountKey.json` as required by the Firebase Admin SDK configuration; do not commit that file. No Gemini API key is required for this rebranded application, and no new AI integration was added.
+- `SECRET_KEY` — signing key for authentication tokens.
+- `ADMIN_PASSWORD` — password used by the admin seed script.
+- `DATABASE_URL` — database connection; SQLite is the local default.
+- `IOT_API_KEY` — key protecting the IoT update endpoint.
+- Optional Firebase service-account credentials for Firebase synchronisation.
 
-## API Documentation
+Use a local `.env` or terminal environment variables as supported by the code. Keep `.env`, `.env.*` (except intentionally committed examples), service-account JSON files, private keys, database files, and other credentials out of Git. Rotate any credential that has been accidentally published.
 
-When the backend is running, FastAPI provides interactive documentation at:
+**No Gemini API key is required by the current rebranded application as audited.** Map tiles currently use Leaflet-based providers; verify the configured tile URL and its usage policy before changing providers or adding a key. Any `VITE_*` value is exposed to frontend code and must not be treated as a server-side secret.
 
-`http://localhost:8000/docs`
+## 🧪 Demo Data & Limitations
 
-The OpenAPI JSON document is available at `http://localhost:8000/openapi.json`.
+- Seed and simulator scripts can provide demo bins, complaints, routes, and device updates.
+- Some AI outputs can be simulated when models or dependencies are unavailable.
+- Analytics may contain sample or synthetic values.
+- Real-time updates require the relevant backend endpoints and services.
+- Hardware examples do not mean physical sensors are connected.
+- Forecast accuracy, hotspot prioritisation, environmental impact, and evidence-based closure have not been independently validated.
+- The prototype is not a substitute for municipal dispatch systems or a formal civic verification process.
 
-## Sample Data and Limitations
+When presenting the project, label sample data and simulated results clearly.
 
-The repository includes seed and simulator scripts for demo dustbins, complaints, routes, and IoT updates. Some analytics values and AI outputs may be synthetic or simulation-based. Model quality, hotspot prediction, closure verification, and municipal integration have not been independently validated. Set `ADMIN_PASSWORD` to a strong local value before running the admin seed script; no default password is committed.
+## 🗺️ Roadmap
 
-## Future Scope
+- [ ] Evaluate waste-overflow prediction using historical time-series data.
+- [ ] Add explainable risk scores with visible contributing factors.
+- [ ] Formalise evidence capture and human reviewer workflows.
+- [ ] Test route planning with real fleet capacity and operational constraints.
+- [ ] Add integration tests for citizen reporting and complaint resolution.
+- [ ] Validate performance with a municipal or community pilot.
+- [ ] Document deployment, security, and operational monitoring.
 
-- Validate forecasting against longitudinal municipal incident data.
-- Improve hotspot detection and explainable risk ranking.
-- Add stronger evidence capture and formal reviewer workflows.
-- Improve route optimisation with live constraints and collection capacity.
-- Integrate with municipal work-order and identity systems.
+## 🤝 Attribution & Licensing
 
-## Licence and Attribution
+CivicLoop AI builds on and rebrands the existing project at [sohit7ss/smart-waste-management](https://github.com/sohit7ss/smart-waste-management). This repository should not be represented as entirely original code.
 
-No tracked `LICENSE` or `COPYING` file was present in the cloned repository at the time of this update. Review the upstream repository's licensing terms before publishing or redistributing.
+No tracked `LICENSE` or `COPYING` file was found in the cloned repository when this README was prepared. Review the upstream repository’s current licensing terms and preserve any required notices before redistributing or publishing. Do not assume that the absence of a local license automatically grants permission to relicense inherited code.
 
-CivicLoop AI reuses and rebrands the existing open-source repository available at [github.com/sohit7ss/smart-waste-management](https://github.com/sohit7ss/smart-waste-management). The inherited implementation and its original contributors should be acknowledged; this repository should not be presented as entirely original code.
+## 👥 Team
+
+**CODE5URGE**
+
+## 📌 Project Summary
+
+CivicLoop AI aims to connect citizen reports with waste-operation workflows through the cycle **SEE → PREDICT → ACT → VERIFY**. The current codebase provides a prototype foundation for exploring these workflows; further integration, testing, and real-world validation are required before claims of predictive effectiveness or operational impact can be made.
