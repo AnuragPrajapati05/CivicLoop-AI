@@ -59,8 +59,8 @@ export default function Header() {
       <div className="header-left">
         <div className="header-logo">🌿</div>
         <div>
-          <div className="header-title">Smart Waste Management</div>
-          <div className="header-subtitle">Real-time Urban Intelligence</div>
+          <div className="header-title">CivicLoop AI</div>
+          <div className="header-subtitle">Predictive Waste Intelligence &amp; Verified Civic Action Network</div>
         </div>
       </div>
       <div className="header-right">

@@ -10,9 +10,9 @@ export default function App() {
         <header className="citizen-header">
           <div className="logo-area">
             <span className="logo-icon">🌿</span>
-            <h1>CityWaste Portal</h1>
+            <h1>CivicLoop AI</h1>
           </div>
-          <p className="subtitle">Report local issues quickly & easily</p>
+          <p className="subtitle">Don't just report the mess. Predict it, prevent it, and prove it was resolved.</p>
         </header>
 
         <nav className="citizen-nav">

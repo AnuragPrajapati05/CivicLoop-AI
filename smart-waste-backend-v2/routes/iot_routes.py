@@ -14,7 +14,7 @@ load_dotenv()
 router = APIRouter(prefix="/iot", tags=["iot"])
 
 # Read IoT API key from .env
-IOT_API_KEY = os.getenv("IOT_API_KEY", "smartbin-iot-key-2026")
+IOT_API_KEY = os.getenv("IOT_API_KEY", "")
 api_key_header = APIKeyHeader(name="X-API-Key")
 
 

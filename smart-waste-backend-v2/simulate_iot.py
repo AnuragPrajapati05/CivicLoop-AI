@@ -2,10 +2,13 @@ import requests
 import random
 import time
 import math
+import os
 from datetime import datetime
 
 SERVER_URL = "http://localhost:8000"
-API_KEY    = "smartbin-iot-key-2026-secure-x9k2m"
+API_KEY    = os.getenv("IOT_API_KEY", "")
+if not API_KEY:
+    raise RuntimeError("IOT_API_KEY must be set before running the IoT simulator")
 
 headers = {
     "X-API-Key":    API_KEY,

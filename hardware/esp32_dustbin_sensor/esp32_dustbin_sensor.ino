@@ -10,7 +10,7 @@
 const char* WIFI_SSID     = "YOUR_WIFI_NAME";
 const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
 const char* SERVER_URL    = "http://YOUR_SERVER_IP:8000";
-const char* API_KEY       = "smartbin-iot-key-2026";
+const char* API_KEY       = "YOUR_IOT_API_KEY";
 const int   DUSTBIN_ID    = 1;
 const float BIN_MAX_DEPTH = 50.0; // cm (empty bin depth)
 

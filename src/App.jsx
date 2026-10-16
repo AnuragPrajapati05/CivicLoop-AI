@@ -48,7 +48,7 @@ export default function App() {
         <Header />
         <div className="loading-spinner" style={{ minHeight: '60vh' }}>
           <div className="spinner"></div>
-          <span className="loading-text">Connecting to Smart Waste API...</span>
+          <span className="loading-text">Connecting to CivicLoop AI...</span>
         </div>
       </>
     );

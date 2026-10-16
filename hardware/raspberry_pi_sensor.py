@@ -4,10 +4,11 @@ import time
 import picamera
 import io
 import base64
+import os
 from datetime import datetime
 
 SERVER_URL  = "http://YOUR_SERVER_IP:8000"
-API_KEY     = "smartbin-iot-key-2026"
+API_KEY     = os.getenv("IOT_API_KEY", "")
 DUSTBIN_ID  = 1
 BIN_DEPTH   = 50  # cm
 

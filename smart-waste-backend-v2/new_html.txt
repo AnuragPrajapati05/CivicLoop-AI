@@ -370,7 +370,7 @@ async function syncToDashboard(binId, data) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-API-Key': 'smartbin-iot-key-2026'
+                'X-API-Key': '__IOT_API_KEY__'
             },
             body: JSON.stringify({
                 dustbin_id: parseInt(binId),

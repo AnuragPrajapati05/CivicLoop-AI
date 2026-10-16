@@ -134,7 +134,7 @@ export const routeNotifyAPI = {
 // ============ IOT ============
 export const iotAPI = {
   getDevices: () => axios.get(`${BASE_URL}/iot/devices`, {
-    headers: { 'X-API-Key': 'smartbin-iot-key-2026' }
+    headers: { 'X-API-Key': import.meta.env.VITE_IOT_API_KEY || '' }
   }),
 }
 

@@ -60,7 +60,7 @@ def reset_for_demo():
   print("  Bin 3: 10%  - [EMPTY]")
   print("  Bin 4: 95%  - [OVERFLOWING]")
   print("  Bin 5: 55%  - [HALF FULL]")
-  print("\nLogin: admin@smartwaste.city.in / admin123")
+  print("\nLogin: admin@smartwaste.city.in / use the ADMIN_PASSWORD value configured during seeding")
   print("Dashboard: http://localhost:5173")
   print("Citizen:   http://localhost:5174")
   print("API Docs:  http://localhost:8000/docs")

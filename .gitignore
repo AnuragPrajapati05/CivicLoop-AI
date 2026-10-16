@@ -25,13 +25,22 @@ dist-ssr
 
 # Python
 __pycache__/
+\.pytest_cache/
 *.py[cod]
 *.pyc
 *.pyo
 
 # Environment & secrets
 .env
+.env.*
+!.env.example
 serviceAccountKey.json
+*serviceAccount*.json
+firebase-adminsdk*.json
+*.pem
+*.key
+*.p12
+*.jks
 
 # Database
 *.db

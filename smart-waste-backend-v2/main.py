@@ -18,7 +18,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-from database import engine, Base
+from database import initialize_database
 import time
 from datetime import datetime
 from dotenv import load_dotenv
@@ -34,8 +34,8 @@ from middleware.security import RequestSizeLimitMiddleware
 
 load_dotenv()
 
-# Create DB Tables
-Base.metadata.create_all(bind=engine)
+# Create DB Tables before serving requests
+initialize_database()
 
 # Create uploads directory
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
@@ -540,7 +540,7 @@ async function syncToDashboard(binId, data) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-API-Key': 'smartbin-iot-key-2026'
+                'X-API-Key': '__IOT_API_KEY__'
             },
             body: JSON.stringify({
                 dustbin_id: parseInt(binId),
@@ -679,6 +679,7 @@ document.addEventListener('visibilitychange', () => {
 </html>
 
     """
+    html = html.replace('__IOT_API_KEY__', os.getenv('IOT_API_KEY', ''))
     return HTMLResponse(content=html)
 
 

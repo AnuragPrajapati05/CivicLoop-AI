@@ -8,8 +8,8 @@ export default function Header() {
           <FaRecycle />
         </div>
         <div>
-          <div className="header-title">Smart Waste Monitor</div>
-          <div className="header-subtitle">AI-Powered Municipal Waste Management System</div>
+          <div className="header-title">CivicLoop AI</div>
+          <div className="header-subtitle">Predictive Waste Intelligence &amp; Verified Civic Action Network</div>
         </div>
       </div>
       <div className="header-right">

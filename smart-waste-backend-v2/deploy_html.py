@@ -4,7 +4,7 @@ with open("main.py", "r", encoding="utf-8") as f:
     content = f.read()
 
 start_marker = "def camera_page():\n    html = \"\"\""
-end_marker = "    \"\"\"\n    return HTMLResponse(content=html)"
+end_marker = "    \"\"\"\n    html = html.replace('__IOT_API_KEY__', os.getenv('IOT_API_KEY', ''))\n    return HTMLResponse(content=html)"
 
 start_idx = content.find(start_marker)
 end_idx = content.find(end_marker)

@@ -27,8 +27,8 @@ export default function Login() {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">♻️</div>
-          <h2>SmartWaste V2 Checkpoint</h2>
-          <p>Please log in to access the Municipal Dashboard</p>
+          <h2>CivicLoop AI</h2>
+          <p>Predictive Waste Intelligence &amp; Verified Civic Action Network</p>
         </div>
         
         {error && <div className="error-banner">{error}</div>}

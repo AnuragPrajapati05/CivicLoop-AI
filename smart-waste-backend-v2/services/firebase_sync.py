@@ -201,7 +201,7 @@ def sync_reports_from_firestore():
                         user = User(
                             name=data.get('userName') or 'Citizen',
                             email=email,
-                            password_hash='firebase_user',
+                            password_hash=None,
                             role='citizen',
                             firebase_uid=firebase_uid or None
                         )
